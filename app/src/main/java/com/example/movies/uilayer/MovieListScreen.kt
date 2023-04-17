@@ -12,29 +12,24 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.movies.datalayer.Movie
+import com.example.movies.navigation.Routes
 
 @Composable
-fun MovieListScreen(movieViewModel: MovieViewModel = viewModel()) {
+fun MovieListScreen(movieViewModel: MovieViewModel = viewModel(), navController: NavHostController) {
 
     val movieList by movieViewModel.movieState.collectAsState()
 
-    Scaffold(
-        floatingActionButton = {
-            FloatingActionButton(onClick = { movieViewModel.addMovie(movie = Movie(id = 0, title = "Title 1", year = 2023)) }) {
-                Icon(imageVector = Icons.Rounded.Add, contentDescription = "Add")
-
-            }
-        }
-    ) {
-        LazyColumn(modifier = Modifier.padding(it)) {
+        LazyColumn {
             items(movieList) { theMovies ->
                 MovieCard(movies = theMovies)
             }
         }
     }
 
-}
 
 
 @Composable

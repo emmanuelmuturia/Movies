@@ -13,10 +13,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.movies.navigation.Routes
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
 
     val movieViewModel: MovieViewModel = viewModel()
-    val navController: NavHostController = rememberNavController()
 
     Column(
         modifier = Modifier.fillMaxSize(),

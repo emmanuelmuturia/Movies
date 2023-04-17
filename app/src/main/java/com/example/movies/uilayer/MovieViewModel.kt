@@ -14,18 +14,13 @@ import kotlinx.coroutines.launch
 
 class MovieViewModel(app: Application) : AndroidViewModel(app) {
 
-    val database = MovieDatabase.getDatabase(app)
-    val dao = database.movieDAO()
-    val movieRepository = MovieRepository(movieDAO = dao)
+    private val database = MovieDatabase.getDatabase(app)
+    private val dao = database.movieDAO()
+    private val movieRepository = MovieRepository(movieDAO = dao)
 
     private var _movieState = MutableStateFlow<List<Movie>>(emptyList())
     val movieState: StateFlow<List<Movie>> = _movieState.asStateFlow()
 
-    /*fun getAllMovies(): Flow<List<Movie>> {
-        return viewModelScope.launch {
-
-        }
-    }*/
 
     init {
         viewModelScope.launch {

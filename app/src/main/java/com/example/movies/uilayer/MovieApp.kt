@@ -11,14 +11,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.movies.datalayer.Movie
 import com.example.movies.navigation.Routes
 
 @Composable
-fun MovieApp() {
+fun MovieApp(navController: NavHostController) {
 
-    val navController: NavHostController = rememberNavController()
     val viewModel: MovieViewModel = viewModel()
 
     Scaffold(
@@ -27,7 +28,8 @@ fun MovieApp() {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    //viewModel.getAllMovies()
+                    //viewModel.movieRepository.getAllMovies()
+                    viewModel.addMovie(movie = Movie(id = 0, title = "Title 1", year = 2023))
                     navController.navigate(Routes.All.name)
                 },
                 backgroundColor = Color.Gray,
@@ -47,7 +49,7 @@ fun MovieApp() {
                 .padding(it),
             color = MaterialTheme.colors.background
         ) {
-            HomeScreen()
+            HomeScreen(navController = navController)
         }
     }
 }
